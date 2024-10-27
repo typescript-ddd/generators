@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityDeleter should render an entity deleter template 1`] = `
+"import { DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { UserRepository } from "../../infrastructure/persistence";
+import { User } from "../../domain";
+
+/**
+ * Represents a user deleter.
+ */
+export class UserDeleter {
+  /**
+   * Initializes a new instance of a user deleter.
+   * @param {UserRepository} repository - The user repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: UserRepository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Deletes a user.
+   * @param {UserId} id - The user id.
+   * @returns {Promise<void>}
+   */
+  public async delete(id: UserId): Promise<void> {
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("User", id);
+    }
+    entity.delete();
+
+    await this.repository.delete(id);
+    this.eventBus.publish(entity.pullEvents());
+  }
+}
+"
+`;

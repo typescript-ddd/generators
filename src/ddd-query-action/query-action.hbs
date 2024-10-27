@@ -1,0 +1,36 @@
+import { QueryBus, QueryAction } from "@typescript-ddd/core";
+import { {{queryName}}Query } from "../../infrastructure";
+
+/**
+ * Represents {{noun actionName}} query action. 
+ */
+export class {{pascal actionName}}QueryAction implements QueryAction {
+  method: string = "GET";
+  path: string = "{{path}}";
+
+  /**
+   * Initializes a new instance of {{noun actionName}} query action.
+   * @param {QueryBus} queryBus - The query bus.
+   */
+  constructor(private readonly queryBus: QueryBus) {}
+
+  /**
+   * Executes {{noun actionName}} query action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    {{#if requestParams}}
+    {{#each requestParams}}
+    const {{name}} = req.params.{{name}};
+    {{/each}}
+    const value = await this.queryBus.ask(new {{queryName}}Query(
+      {{#each requestParams}}
+      {{name}},
+      {{/each}}
+    ));
+    {{else}}
+    const value = await this.queryBus.ask(new {{queryName}}Query());
+    {{/if}}
+    res.status(200).json(value);
+  }
+}

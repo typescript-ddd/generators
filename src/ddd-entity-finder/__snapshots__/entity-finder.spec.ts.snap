@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityCreator should render a created entity 1`] = `
+"import { Criteria, DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { UserRepository } from "../../infrastructure/persistence";
+import { User, UserId } from "../../domain";
+
+/**
+ * Represents a class to find users.
+ */
+export class UserFinder {
+  /**
+   * Initializes a new instance of a user finder.
+   * @param {UserRepository} repository - The user repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: UserRepository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Finds a user by a user id.
+   * @param {UserId} id - The user identity value.
+   * @returns {Promise<UserView>} - A user view.
+   */
+  public async findById(id: UserId): Promise<UserView> {
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("User", id);
+    }
+    return UserView.create(...entity);
+  }
+
+  /**
+   * Finds users by criteria.
+   * @param {Criteria} criteria - The critieria value.
+   * @returns {Promise<UserView[]>} - A collection of user views.
+   */
+  public async findAll(criteria: Criteria): Promise<UserView[]> {
+    const entities = await this.repository.findAll(criteria);
+    return entities.map((entity) => UserView.create(...entity));
+  }
+}
+"
+`;

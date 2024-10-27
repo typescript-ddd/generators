@@ -1,0 +1,33 @@
+import { InvariantViolationError, ValueObject } from "@typescript-ddd/core";
+
+/**
+ * Represents {{noun className}} value.
+ */
+export class {{pascal className}} extends ValueObject<{{valueType}}> {
+  /**
+   * Initializes a new instance of {{noun className}} value.
+   * @param {{lbrace}}{{valueType}}{{rbrace}} value - The value.
+   */
+  constructor(value: {{valueType}}) {
+    super(value);
+    if (!value) {
+      throw new InvariantViolationError("value", "The {{natural className}} value cannot be null or undefined.");
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected selfEquals(other: {{pascal className}}): boolean {
+    return this.value === other.value;
+  }
+
+  /**
+   * Creates a new instance of {{noun className}} value.
+   * @param value {{valueType}} - The value.
+   * @returns {{lbrace}}{{pascal className}}{{rbrace}} - A new instance of {{noun className}} value.
+   */
+  public static create(value: {{valueType}}): {{pascal className}} {
+    return new {{pascal className}}(value);
+  }
+}

@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ValueObject should render template 1`] = `
+"import { InvariantViolationError, ValueObject } from "@typescript-ddd/core";
+
+/**
+ * Represents a phone number value.
+ */
+export class PhoneNumber extends ValueObject<string> {
+  /**
+   * Initializes a new instance of a phone number value.
+   * @param {string} value - The value.
+   */
+  constructor(value: string) {
+    super(value);
+    if (!value) {
+      throw new InvariantViolationError("value", "The phone number value cannot be null or undefined.");
+    }
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected selfEquals(other: PhoneNumber): boolean {
+    return this.value === other.value;
+  }
+
+  /**
+   * Creates a new instance of a phone number value.
+   * @param value string - The value.
+   * @returns {PhoneNumber} - A new instance of a phone number value.
+   */
+  public static create(value: string): PhoneNumber {
+    return new PhoneNumber(value);
+  }
+}"
+`;

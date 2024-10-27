@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityView should render a created entity view with view property 1`] = `
+"import { User } from "../../domain/models";
+import { EmailView } from "./EmailView";
+
+export class UserView {
+  private constructor(user: User) {
+    this.id = user.getId().value;
+    this.name = user.getName().value;
+    this.email = EmailView.create(user.getEmail());
+  }
+
+  public readonly id: string;
+
+  public readonly name: string;
+  public readonly email: EmailView;
+}"
+`;
+
+exports[`EntityView should render a created entity view with view property value 1`] = `
+"import { User } from "../../domain/models";
+import { EmailView } from "./EmailView";
+
+export class UserView {
+  private constructor(user: User) {
+    this.id = user.getId().value;
+    this.name = user.getName().value;
+    this.email = EmailView.create(user.getEmail()).emailAddress;
+  }
+
+  public readonly id: string;
+
+  public readonly name: string;
+  public readonly email: string;
+}"
+`;

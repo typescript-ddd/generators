@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityId should render entity id template 1`] = `
+"import { EntityId } from "@typescript-ddd/core";
+
+/**
+ * Represents the unique identifier for a user.
+ */
+export class UserId extends EntityId {
+  /**
+   * Initializes a new instance of a user identifier.
+   * @param {string} value - The identity value.
+   */
+  constructor(value: string) {
+    super(value);
+  }
+
+  /**
+   * Creates a new instance of a user identifier.
+   * @returns {User}
+   */
+  public static create(): UserId {
+    return new UserId(Uuid);
+  }
+
+  /**
+   * Creates a new instance of a user identifier.
+   * @param {string} value - The identity value.
+   * @returns {UserId} - A new instance of a user identifier.
+   */
+  public static from(value: string): UserId {
+    return new UserId(value);
+  }
+}"
+`;

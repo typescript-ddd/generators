@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Aggregate should render template 1`] = `
+"import { AggregateRoot, CreateEntityProps, UpdateEntityProps } from "@typescript-ddd/core";
+import { UserId } from "./user-id";
+import { UserCreatedEvent, UserUpdatedEvent } from "../events";
+
+/**
+ * Represents the properties required to create a user.
+ */
+export interface CreateUserProps extends CreateEntityProps {
+  name: string,
+}
+
+/**
+ * Represents the properties required to update a user.
+ */
+export interface UpdateUserProps extends UpdateEntityProps<UserId> {
+  name: string,
+}
+
+/**
+ * Represents a user.
+ */
+export class User extends AggregateRoot<UserId> {
+  /**
+   * Initilizes a new instance of a user.
+   * @param {UserId} id - The unique identifier of the user.
+   * @param {string} name - The name of the user.
+   */
+  private constructor(
+    id?: UserId,    
+    private readonly name: string,
+    ) {
+      super(id ?? UserId.create());
+      // TODO : Add validation
+
+      if (!id) {
+        this.applyChange(new UserCreatedEvent(this.id, this));
+      }
+    }
+
+  /**
+   * Gets the name.
+   */
+   getName(): string {
+     return this.name;
+   }
+
+  /**
+   * Updates a user.
+   * @param {UpdateUserProps} props - The properties to update the user.
+   * @returns {void}
+   */
+  update(props: UpdateUserProps): void {
+    // TODO : Add validation here
+    this.name = props.name;
+    this.applyChange(new UserUpdatedEvent(this.id, props));
+  }
+
+  /**
+   * Creates a new instance of a user.
+   * @param {CreateUserProps} props - The properties required to create a user.
+   * @param {UserId} id - Optional unique identifier of the user.
+   * @returns {User} - The newly created user.
+   */
+  static create(props: CreateUserProps, id?: UserId): User {
+    return new User(
+      id,
+      props.name,
+    );
+  }
+}"
+`;

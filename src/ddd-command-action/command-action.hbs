@@ -1,0 +1,40 @@
+import { CommandBus, CommandAction } from "@typescript-ddd/core";
+import { {{commandName}}Command } from "../../infrastructure";
+
+/**
+ * Represents {{noun actionName}} command action. 
+ */
+export class {{pascal actionName}}CommandAction implements CommandAction {
+  method: string = "{{method}}";
+  path: string = "{{path}}";
+
+  /**
+   * Initializes a new instance of {{noun actionName}} command action.
+   * @param {CommandBus} commandBus - The command bus.
+   */
+  constructor(private readonly commandBus: CommandBus) {}
+
+  /**
+   * Executes {{noun actionName}} command action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    {{#if requestParams}}
+    {{#each requestParams}}
+    const {{name}} = req.params.{{name}};
+    {{/each}}
+    const value = await this.commandBus.execute(new {{commandName}}Command(
+      {{#each requestParams}}
+      {{name}},
+      {{/each}}
+    ));
+    {{else}}
+    const value = await this.commandBus.execute(new {{commandName}}Command());
+    {{/if}}
+    {{#if status}}
+    res.status({{status}}).json(value);
+    {{else}}
+    res.status(200).json(value);
+    {{/if}}
+  }
+}

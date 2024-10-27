@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Entity should render template 1`] = `
+"import { CreateEntityProps, Entity, UpdateEntityProps } from "@typescript-ddd/core";
+import { UserId } from "./user-id";
+
+/**
+ * Represents the properties required to create a user.
+ */
+export interface CreateUserProps extends CreateEntityProps {
+  name: string,
+  email: string,
+}
+
+/**
+ * Represents the properties required to update a user.
+ */
+export interface UpdateUserProps extends UpdateEntityProps<UserId> {
+  name: string,
+  email: string,
+}
+
+/**
+ * Represents a user.
+ */
+export class User extends Entity<UserId> {
+  /**
+   * Initilizes a new instance of a user.
+   * @param {UserId} id - The unique identifier of the user.
+   * @param {string} name - The name of the user.
+   * @param {string} email - The email of the user.
+   */
+  private constructor(
+    id: UserId,    
+    private readonly name: string,
+        private readonly email: string,
+    ) {
+      super(id);
+    }
+
+  /**
+   * Gets the name.
+   * @returns {string}
+   */
+   getName(): string {
+     return this.name;
+   }
+
+  /**
+   * Gets the email.
+   * @returns {string}
+   */
+   getEmail(): string {
+     return this.email;
+   }
+
+  /**
+   * Creates a new instance of a user.
+   * @param {CreateUserProps} props - The properties to create the user.
+   * @param {UserId} id - Optional unique identifier of the user.
+   * @returns {User} - A new instance of a user.
+   */
+  static create(props: CreateUserProps, id?: UserId): User {
+    return new User(
+      id ?? UserId.create(),
+      props.name,
+      props.email,
+    );
+  }
+}"
+`;

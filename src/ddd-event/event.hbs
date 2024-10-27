@@ -1,0 +1,16 @@
+import { DomainEvent } from "@typescript-ddd/core";
+import { {{pascal entityName}}, {{pascal entityName}}Id } from "../../domain/models";
+
+/**
+ * Represents {{noun entityName}} {{natural eventType}} event.
+ */
+export class {{pascal entityName}}{{pascal eventType}}Event extends DomainEvent<{{pascal entityName}}> {
+  /**
+   * Initializes a new instance of {{aOrAn entityName}} {{natural entityName}} {{natural eventType}} event.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - The identifier of the {{natural entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}{{rbrace}} payload - The {{natural entityName}} payload.
+   */
+  constructor(id: {{pascal entityName}}Id, payload: {{pascal entityName}}) {
+    super(id, "{{eventTopic}}", payload);
+  }
+}

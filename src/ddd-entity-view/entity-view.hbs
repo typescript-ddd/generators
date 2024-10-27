@@ -1,0 +1,33 @@
+import { {{pascal entityName}} } from "../../domain/models";
+{{#each properties}}
+{{#contains "View" creator}}
+import { {{../creator}} } from "./{{../creator}}";
+{{else}}
+{{#ifDefined creator}}
+import { {{../creator}} } from "../../domain/models";
+{{/ifDefined}}
+{{/contains}}
+{{/each}}
+{{#each properties}}
+{{#contains "View" creator}}
+{{/contains}}
+{{/each}}
+
+export class {{pascal entityName}}View {
+  private constructor({{lower entityName}}: {{pascal entityName}}) {
+    this.id = {{lower entityName}}.getId().value;
+    {{#each properties}}
+    {{#ifDefined creator}}
+    this.{{../name}} = {{../creator}}.create({{lower ../../entityName}}.get{{pascal ../name}}()){{#ifDefined ../value}}.{{../value}}{{/ifDefined}};
+    {{else}}
+    this.{{../name}} = {{lower ../../entityName}}.get{{pascal ../name}}(){{#ifDefined ../value}}.{{../value}}{{/ifDefined}};
+    {{/ifDefined}}
+    {{/each}}
+  }
+
+  public readonly id: string;
+
+  {{#each properties}}
+  public readonly {{name}}: {{type}};
+  {{/each}}
+}

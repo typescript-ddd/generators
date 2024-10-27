@@ -1,0 +1,30 @@
+import { DomainEventBus } from "@typescript-ddd/core";
+import { {{pascal entityName}}Repository } from "../../infrastructure/persistence";
+import { {{pascal entityName}} } from "../../domain";
+
+/**
+ * Represents {{noun entityName}} creator.
+ */
+export class {{pascal entityName}}Creator {
+  /**
+   * Initializes a new instance of {{noun entityName}} creator.
+   * @param {{lbrace}}{{pascal entityName}}Repository{{rbrace}} repository - The {{natural entityName}} repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: {{pascal entityName}}Repository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Creates a new {{natural entityName}}.
+   * @param {{lbrace}}Create{{pascal entityName}}Props{{rbrace}} props - the properties to create the {{natural entityName}}.
+   * @returns {{lbrace}}Promise<{{pascal entityName}}>{{rbrace}} - A newly created {{natural entityName}}.
+   */
+  public async create(props: Create{{pascal entityName}}Props): Promise<{{pascal entityName}}> {
+    const entity = {{pascal entityName}}.create(props);
+    await this.repository.save(entity);
+    this.eventBus.publish(entity.pullEvents());
+    return entity;
+  }
+}

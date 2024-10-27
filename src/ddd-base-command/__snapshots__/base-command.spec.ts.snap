@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query should render template 1`] = `
+"import { Command } from "@typescript-ddd/core";
+
+/**
+ * Represents a base class for user commands.
+ * @param {UserId} id - The id of the user.
+ */
+export abstract class UserCommand implements Command {
+  protected constructor(
+    public readonly id: UserId,
+  ) {
+    // TODO: Add validation here
+  }
+}
+"
+`;

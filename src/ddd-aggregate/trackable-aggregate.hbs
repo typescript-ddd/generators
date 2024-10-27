@@ -1,0 +1,104 @@
+// {{entityName}}.ts
+import { TrackableAggregateRoot, CreateEntityProps, UpdateEntityProps, UtcDate } from "@typescript-ddd/core";
+import { {{pascal entityName}}Id } from "./{{lower entityName}}-id";
+import { {{pascal entityName}}CreatedEvent, {{pascal entityName}}UpdatedEvent } from "../events";
+
+/**
+ * Represents the properties required to create {{noun entityName}}.
+ */
+export interface Create{{pascal entityName}}Props extends CreateEntityProps {
+  {{#each properties}}
+  {{#if isNullable}}
+  {{name}}?: {{type}},
+  {{else}}
+  {{name}}: {{type}},
+  {{/if}}
+  {{/each}}
+  createdAtUtc?: UtcDate,
+  updatedAtUtc?: UtcDate,
+}
+
+/**
+ * Represents the properties required to update {{noun entityName}}.
+ */
+export interface Update{{pascal entityName}}Props extends UpdateEntityProps<{{pascal entityName}}Id> {
+  {{#each properties}}
+  {{#if isNullable}}
+  {{name}}?: {{type}},
+  {{else}}
+  {{name}}: {{type}},
+  {{/if}}
+  {{/each}}
+}
+
+/**
+ * Represents {{noun entityName}}.
+ */
+export class {{pascal entityName}} extends TrackableAggregateRoot<{{pascal entityName}}Id> {
+  /**
+   * Initilizes a new instance of {{noun entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - The unique identifier of the {{natural entityName}}.
+   {{#each properties}}
+   * @param {{lbrace}}{{type}}{{rbrace}} {{name}} - The {{name}} of the {{natural ../entityName}}.
+   {{/each}}
+   * @param {UtcDate} createdAtUtc - The date and time the {{natural entityName}} was created.
+   * @param {UtcDate} updatedAtUtc - The date and time the {{natural entityName}} was last updated.
+   */
+  private constructor(
+    id?: {{pascal entityName}}Id,    
+    {{#each properties}}
+    {{#if isNullable}}
+    private readonly {{name}}?: {{type}},
+    {{else}}
+    private readonly {{name}}: {{type}},
+    {{/if}}
+    {{/each}}
+    createdAtUtc?: UtcDate,
+    updatedAtUtc?: UtcDate) {
+      super(id ?? {{pascal entityName}}Id.create(), createdAt, updatedAt);
+      // TODO : Add validation
+      
+      if (!id) {
+        this.applyChange(new {{pascal entityName}}CreatedEvent(this.id, this));
+      }
+    }
+
+  {{#each properties}}
+  /**
+   * Gets the {{name}}.
+   */
+   get{{pascal name}}(): {{type}}{{#if isNullable}} | undefined{{/if}} {
+     return this.{{name}};
+   }
+
+  {{/each}}
+  /**
+   * Updates {{noun entityName}}.
+   * @param {Update{{pascal entityName}}Props} props - The properties to update the {{natural entityName}}.
+   * @returns {void}
+   */
+  update(props: Update{{pascal entityName}}Props): void {
+    // TODO : Add validation here
+    {{#each properties}}
+    this.{{name}} = props.{{name}};
+    {{/each}}
+    this.applyChange(new {{pascal entityName}}UpdatedEvent(this.id, props));
+  }
+
+  /**
+   * Creates a new instance of {{noun entityName}}.
+   * @param {{lbrace}}Create{{pascal entityName}}Props{{rbrace}} props - The properties required to create {{noun entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - Optional unique identifier of the {{natural entityName}}.
+   * @returns {{lbrace}}{{pascal entityName}}{{rbrace}} - The newly created {{natural entityName}}.
+   */
+  static create(props: Create{{pascal entityName}}Props, id?: {{pascal entityName}}Id): {{pascal entityName}} {
+    return new {{pascal entityName}}(
+      id,
+      {{#each properties}}
+      props.{{name}},
+      {{/each}}
+      props.createdAtUtc,
+      props.updatedAtUtc,
+    );
+  }
+}

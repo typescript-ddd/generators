@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityUpdater should render a updated entity template 1`] = `
+"import { DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { UserRepository } from "../../infrastructure/persistence";
+import { User } from "../../domain";
+
+/**
+ * Represents a user updater.
+ */
+export class UserUpdater {
+  /**
+   * Initializes a new instance of a user updater.
+   * @param {UserRepository} repository - The user repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: UserRepository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Updates the user.
+   * @param {UpdateUserProps} props - the properties to update for the user.
+   * @returns {Promise<void>}
+   */
+  public async update(props: UpdateUserProps): Promise<void> {
+    const { id } = props;
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("User", id);
+    }
+    User.update(props);
+    await this.repository.save(entity);
+    this.eventBus.publish(entity.pullEvents());
+  }
+}
+"
+`;

@@ -1,0 +1,34 @@
+import { DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { {{pascal entityName}}Repository } from "../../infrastructure/persistence";
+import { {{pascal entityName}} } from "../../domain";
+
+/**
+ * Represents {{noun entityName}} updater.
+ */
+export class {{pascal entityName}}Updater {
+  /**
+   * Initializes a new instance of {{noun entityName}} updater.
+   * @param {{lbrace}}{{pascal entityName}}Repository{{rbrace}} repository - The {{natural entityName}} repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: {{pascal entityName}}Repository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Updates the {{natural entityName}}.
+   * @param {{lbrace}}Update{{pascal entityName}}Props{{rbrace}} props - the properties to update for the {{natural entityName}}.
+   * @returns {Promise<void>}
+   */
+  public async update(props: Update{{pascal entityName}}Props): Promise<void> {
+    const { id } = props;
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("{{pascal entityName}}", id);
+    }
+    {{pascal entityName}}.update(props);
+    await this.repository.save(entity);
+    this.eventBus.publish(entity.pullEvents());
+  }
+}

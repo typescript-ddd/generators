@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommandHandler Should render with delete action 1`] = `
+"import { CommandHandler } from "@typescript-ddd/core";
+import { UserDeleter } from "../../application";
+import { DeleteUserCommand } from "./DeleteUserCommand";
+
+/**
+ * Represents a handler for the delete user commmand.
+ */
+export class DeleteUserCommandHandler implements CommandHandler<DeleteUserCommand> {
+  /**
+   * Initializes a new delete user command handler instance.
+   * @param {UserDeleter} deleter - the user deleter.
+   */
+  constructor(private readonly deleter: UserDeleter) {}
+
+  /**
+   * Handles the delete user command.
+   * @param {DeleteUserCommand} command - The command to handle.
+   * @returns {Promise<void>}
+   */
+  public async handle(command: DeleteUserCommand): Promise<void> {
+    await this.deleter.delete({
+      id: command.id,
+    });
+  }
+}
+"
+`;
+
+exports[`CommandHandler Should render with update action 1`] = `
+"import { CommandHandler } from "@typescript-ddd/core";
+import { UserUpdater } from "../../application";
+import { UpdateUserCommand } from "./UpdateUserCommand";
+
+/**
+ * Represents a handler for the update user commmand.
+ */
+export class UpdateUserCommandHandler implements CommandHandler<UpdateUserCommand> {
+  /**
+   * Initializes a new update user command handler instance.
+   * @param {UserUpdater} updater - the user updater.
+   */
+  constructor(private readonly updater: UserUpdater) {}
+
+  /**
+   * Handles the update user command.
+   * @param {UpdateUserCommand} command - The command to handle.
+   * @returns {Promise<void>}
+   */
+  public async handle(command: UpdateUserCommand): Promise<void> {
+    await this.updater.update({
+      id: command.id,
+      name: command.name,
+      email: command.email,
+    });
+  }
+}
+"
+`;
+
+exports[`CommandHandler should render with create action 1`] = `
+"import { CommandHandler } from "@typescript-ddd/core";
+import { UserCreator } from "../../application";
+import { CreateUserCommand } from "./CreateUserCommand";
+
+/**
+ * Represents a handler for the create user commmand.
+ */
+export class CreateUserCommandHandler implements CommandHandler<CreateUserCommand> {
+  /**
+   * Initializes a new create user command handler instance.
+   * @param {UserCreator} creator - the user creator.
+   */
+  constructor(private readonly creator: UserCreator) {}
+
+  /**
+   * Handles the create user command.
+   * @param {CreateUserCommand} command - The command to handle.
+   * @returns {Promise<void>}
+   */
+  public async handle(command: CreateUserCommand): Promise<void> {
+    await this.creator.create({
+      name: command.name,
+      email: command.email,
+    });
+  }
+}
+"
+`;

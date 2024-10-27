@@ -1,0 +1,35 @@
+import { EntityId{{#if isUuid}}, Uuid{{/if}} } from "@typescript-ddd/core";
+
+/**
+ * Represents the unique identifier for {{noun entityName}}.
+ */
+export class {{pascal entityName}}Id extends EntityId {
+  /**
+   * Initializes a new instance of {{noun entityName}} identifier.
+   * @param {{lbrace}}{{idType}}{{rbrace}} value - The identity value.
+   */
+  constructor(value: {{idType}}) {
+    super(value);
+  }
+
+  /**
+   * Creates a new instance of {{noun entityName}} identifier.
+   * @returns {{lbrace}}{{entityName}}{{rbrace}}
+   */
+  public static create(): {{pascal entityName}}Id {
+    {{#if isUuid}}
+    return new {{pascal entityName}}Id(Uuid.create());
+    {{else}}
+    return new {{pascal entityName}}Id({{valueCreator}});
+    {{/if}}
+  }
+
+  /**
+   * Creates a new instance of {{noun entityName}} identifier.
+   * @param {{lbrace}}{{idType}}{{rbrace}} value - The identity value.
+   * @returns {{lbrace}}{{pascal entityName}}Id{{rbrace}} - A new instance of {{noun entityName}} identifier.
+   */
+  public static from(value: {{idType}}): {{pascal entityName}}Id {
+    return new {{pascal entityName}}Id(value);
+  }
+}

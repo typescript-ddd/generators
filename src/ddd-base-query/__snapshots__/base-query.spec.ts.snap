@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query should render template 1`] = `
+"import { Query } from "@typescript-ddd/core";
+
+/**
+ * Represents a base class for user queries.
+ * @param {UserId} id - The id of the user.
+ */
+export abstract class UserQuery implements Query {
+  protected constructor(
+    public readonly id: UserId,
+  ) {
+    // TODO: Add validation here
+  }
+}
+"
+`;

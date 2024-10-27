@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Query should render template 1`] = `
+"import { Query } from "@typescript-ddd/core";
+
+/**
+ * Represents a query for finding a user.
+ * @param {UserId} id - The id of the user.
+ */
+export class FindUserQuery implements Query {
+  constructor(
+    public readonly id: UserId,
+  ) {
+    // TODO: Add validation here
+  }
+}
+"
+`;

@@ -1,0 +1,27 @@
+import { QueryHandler } from "@typescript-ddd/core";
+import { {{pascal entityName}}View } from "../../domain/views";
+import { {{pascal entityName}}Query } from ".";
+
+/**
+ * Represents a handler for {{noun entityName}} query.
+ */
+export class {{pascal entityName}}QueryHandler implements QueryHandler<{{pascal entityName}}Query> {
+  /**
+   * Initializes a new {{natural entityName}} query handler instance.
+   * @param {{lbrace}}{{pascal entityName}}Finder{{rbrace}} {{lower entityName}}Finder - the {{natural entityName}} finder.
+   */
+  constructor(private readonly {{lower entityName}}Finder: {{pascal entityName}}Finder) {}
+
+  /**
+   * Handles the {{natural entityName}} query.
+   * @param {{lbrace}}{{pascal entityName}}Query{{rbrace}} query - The query to handle.
+   * @returns {{lbrace}}{{pascal entityName}}View{{rbrace}}
+   */
+  public async handle(query: {{pascal entityName}}Query): Promise<{{pascal entityName}}View> {
+    return await this.{{lower entityName}}Finder.find({
+      {{#each properties}}
+      {{name}}: query.{{name}},
+      {{/each}}
+    });
+  }
+}

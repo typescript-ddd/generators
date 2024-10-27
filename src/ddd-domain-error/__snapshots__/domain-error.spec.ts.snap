@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityId should remove error suffix if present 1`] = `
+"import { DomainError } from "@typescript-ddd/core";
+
+/**
+ * Represents a unauthorized error.
+ */
+export class UnauthorizedError extends DomainError {
+  /**
+   * Initializes a new instance of a unauthorized error.
+   * @param { string | undefined } message - The message text.
+*/
+  public constructor(message?: string) {
+    super(message ?? "A unauthorized error has occurred.");
+  }
+}"
+`;
+
+exports[`EntityId should render domain error template with message 1`] = `
+"import { DomainError } from "@typescript-ddd/core";
+
+/**
+ * Represents a unauthorized error.
+ */
+export class UnauthorizedError extends DomainError {
+  /**
+   * Initializes a new instance of a unauthorized error.
+   */
+  public constructor() {
+    super("User is not authorized to perform this action");
+  }
+}"
+`;
+
+exports[`EntityId should render domain error template with message parameter 1`] = `
+"import { DomainError } from "@typescript-ddd/core";
+
+/**
+ * Represents a unauthorized error.
+ */
+export class UnauthorizedError extends DomainError {
+  /**
+   * Initializes a new instance of a unauthorized error.
+   * @param { string | undefined } message - The message text.
+*/
+  public constructor(message?: string) {
+    super(message ?? "A unauthorized error has occurred.");
+  }
+}"
+`;

@@ -1,0 +1,18 @@
+/**
+ * {{description}}
+ * @typedef {{pascal typeName}}
+ * @type {object}
+ {{#each values}}
+ * @property {string} {{key}} - {{aOrAn value}} {{natural value}} {{singular (natural ../typeName)}}.
+ {{/each}}
+ */
+export const {{pascal typeName}} = {
+    {{#each values}}
+    {{name}}: "{{name}}",
+    {{/each}}
+};
+
+/**
+ * {{description}}
+ */
+export type {{pascal typeName}} = typeof {{pascal typeName}}[keyof typeof {{pascal typeName}}];

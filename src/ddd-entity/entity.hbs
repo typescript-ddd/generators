@@ -1,0 +1,73 @@
+import { CreateEntityProps, Entity, UpdateEntityProps } from "@typescript-ddd/core";
+import { {{pascal entityName}}Id } from "./{{lower entityName}}-id";
+
+/**
+ * Represents the properties required to create {{noun entityName}}.
+ */
+export interface Create{{pascal entityName}}Props extends CreateEntityProps {
+  {{#each properties}}
+  {{#if isNullable}}
+  {{name}}?: {{type}},
+  {{else}}
+  {{name}}: {{type}},
+  {{/if}}
+  {{/each}}
+}
+
+/**
+ * Represents the properties required to update {{noun entityName}}.
+ */
+export interface Update{{pascal entityName}}Props extends UpdateEntityProps<{{pascal entityName}}Id> {
+  {{#each properties}}
+  {{#if isNullable}}
+  {{name}}?: {{type}},
+  {{else}}
+  {{name}}: {{type}},
+  {{/if}}
+  {{/each}}
+}
+
+/**
+ * Represents {{noun entityName}}.
+ */
+export class {{pascal entityName}} extends Entity<{{pascal entityName}}Id> {
+  /**
+   * Initilizes a new instance of a {{natural entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - The unique identifier of the {{natural entityName}}.
+   {{#each properties}}
+   * @param {{lbrace}}{{type}}{{rbrace}} {{name}} - The {{name}} of the {{natural ../entityName}}.
+   {{/each}}
+   */
+  private constructor(
+    id: {{pascal entityName}}Id,    
+    {{#each properties}}
+    private readonly {{name}}{{#if isNullable}}?{{/if}}: {{type}},
+    {{/each}}) {
+      super(id);
+    }
+
+  {{#each properties}}
+  /**
+   * Gets the {{name}}.
+   * @returns {{lbrace}}{{type}}{{#if isNullable}} | undefined{{/if}}{{rbrace}}
+   */
+   get{{pascal name}}(): {{type}}{{#if isNullable}} | undefined{{/if}} {
+     return this.{{name}};
+   }
+
+  {{/each}}
+  /**
+   * Creates a new instance of {{noun entityName}}.
+   * @param {{lbrace}}Create{{pascal entityName}}Props{{rbrace}} props - The properties to create the {{natural entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - Optional unique identifier of the {{natural entityName}}.
+   * @returns {{lbrace}}{{pascal entityName}}{{rbrace}} - A new instance of {{noun entityName}}.
+   */
+  static create(props: Create{{pascal entityName}}Props, id?: {{pascal entityName}}Id): {{pascal entityName}} {
+    return new {{pascal entityName}}(
+      id ?? {{pascal entityName}}Id.create(),
+      {{#each properties}}
+      props.{{name}},
+      {{/each}}
+    );
+  }
+}

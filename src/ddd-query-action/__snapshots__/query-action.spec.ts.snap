@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`QueryAction should render template 1`] = `
+"import { QueryBus, QueryAction } from "@typescript-ddd/core";
+import { FindUsersQuery } from "../../infrastructure";
+
+/**
+ * Represents a get user query action. 
+ */
+export class GetUsersQueryAction implements QueryAction {
+  method: string = "GET";
+  path: string = "/users";
+
+  /**
+   * Initializes a new instance of a get user query action.
+   * @param {QueryBus} queryBus - The query bus.
+   */
+  constructor(private readonly queryBus: QueryBus) {}
+
+  /**
+   * Executes a get user query action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    const value = await this.queryBus.ask(new FindUsersQuery());
+    res.status(200).json(value);
+  }
+}
+"
+`;
+
+exports[`QueryAction should render template with request params 1`] = `
+"import { QueryBus, QueryAction } from "@typescript-ddd/core";
+import { FindUserQuery } from "../../infrastructure";
+
+/**
+ * Represents a get user query action. 
+ */
+export class GetUserQueryAction implements QueryAction {
+  method: string = "GET";
+  path: string = "/user/:id";
+
+  /**
+   * Initializes a new instance of a get user query action.
+   * @param {QueryBus} queryBus - The query bus.
+   */
+  constructor(private readonly queryBus: QueryBus) {}
+
+  /**
+   * Executes a get user query action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    const id = req.params.id;
+    const value = await this.queryBus.ask(new FindUserQuery(
+      id,
+    ));
+    res.status(200).json(value);
+  }
+}
+"
+`;

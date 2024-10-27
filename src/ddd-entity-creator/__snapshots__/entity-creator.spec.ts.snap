@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EntityCreator should render a created entity 1`] = `
+"import { DomainEventBus } from "@typescript-ddd/core";
+import { UserRepository } from "../../infrastructure/persistence";
+import { User } from "../../domain";
+
+/**
+ * Represents a user creator.
+ */
+export class UserCreator {
+  /**
+   * Initializes a new instance of a user creator.
+   * @param {UserRepository} repository - The user repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: UserRepository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Creates a new user.
+   * @param {CreateUserProps} props - the properties to create the user.
+   * @returns {Promise<User>} - A newly created user.
+   */
+  public async create(props: CreateUserProps): Promise<User> {
+    const entity = User.create(props);
+    await this.repository.save(entity);
+    this.eventBus.publish(entity.pullEvents());
+    return entity;
+  }
+}
+"
+`;

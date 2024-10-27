@@ -1,0 +1,17 @@
+import { Query } from "@typescript-ddd/core";
+
+/**
+ * Represents a base class for {{natural entityName}} queries.
+ {{#each properties}}
+ * @param {{lbrace}}{{type}}{{rbrace}} {{name}} - The {{natural name}} of the {{natural ../entityName}}.
+  {{/each}}
+ */
+export abstract class {{pascal entityName}}Query implements Query {
+  protected constructor(
+    {{#each properties}}
+    public readonly {{name}}: {{type}},
+    {{/each}}
+  ) {
+    // TODO: Add validation here
+  }
+}

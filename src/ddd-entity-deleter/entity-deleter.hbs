@@ -1,0 +1,34 @@
+import { DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { {{pascal entityName}}Repository } from "../../infrastructure/persistence";
+import { {{pascal entityName}} } from "../../domain";
+
+/**
+ * Represents {{noun entityName}} deleter.
+ */
+export class {{pascal entityName}}Deleter {
+  /**
+   * Initializes a new instance of {{noun entityName}} deleter.
+   * @param {{lbrace}}{{pascal entityName}}Repository{{rbrace}} repository - The {{natural entityName}} repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: {{pascal entityName}}Repository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Deletes {{noun entityName}}.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - The {{natural entityName}} id.
+   * @returns {Promise<void>}
+   */
+  public async delete(id: {{pascal entityName}}Id): Promise<void> {
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("{{pascal entityName}}", id);
+    }
+    entity.delete();
+
+    await this.repository.delete(id);
+    this.eventBus.publish(entity.pullEvents());
+  }
+}

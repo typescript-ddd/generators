@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CommandAction should render template 1`] = `
+"import { CommandBus, CommandAction } from "@typescript-ddd/core";
+import { CreatUserCommand } from "../../infrastructure";
+
+/**
+ * Represents a post user command action. 
+ */
+export class PostUserCommandAction implements CommandAction {
+  method: string = "POST";
+  path: string = "/users";
+
+  /**
+   * Initializes a new instance of a post user command action.
+   * @param {CommandBus} commandBus - The command bus.
+   */
+  constructor(private readonly commandBus: CommandBus) {}
+
+  /**
+   * Executes a post user command action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    const value = await this.commandBus.execute(new CreatUserCommand());
+    res.status(200).json(value);
+  }
+}
+"
+`;
+
+exports[`CommandAction should render template with request params 1`] = `
+"import { CommandBus, CommandAction } from "@typescript-ddd/core";
+import { CreatUserCommand } from "../../infrastructure";
+
+/**
+ * Represents a post user command action. 
+ */
+export class PostUserCommandAction implements CommandAction {
+  method: string = "POST";
+  path: string = "/users";
+
+  /**
+   * Initializes a new instance of a post user command action.
+   * @param {CommandBus} commandBus - The command bus.
+   */
+  constructor(private readonly commandBus: CommandBus) {}
+
+  /**
+   * Executes a post user command action.
+   * @returns {Promise<void>}
+   */
+  public async execute(req: any, res: any): Promise<void> {
+    const name = req.params.name;
+    const email = req.params.email;
+    const value = await this.commandBus.execute(new CreatUserCommand(
+      name,
+      email,
+    ));
+    res.status(201).json(value);
+  }
+}
+"
+`;
