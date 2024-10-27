@@ -1,4 +1,5 @@
 const typescript = require("rollup-plugin-typescript2")
+const peerDepsExternal = require("rollup-plugin-peer-deps-external")
 const pkg = require("./package.json")
 
 module.exports = {
@@ -10,9 +11,13 @@ module.exports = {
       exports: 'named',
       sourcemap: true,
       strict: false
+    }, {
+        file: pkg.module,
+        format: 'es',
     }
   ],
   plugins: [
-    typescript()
+    peerDepsExternal(),
+    typescript({ useTsConfgiDeclarationDir: true }),
   ],
 }

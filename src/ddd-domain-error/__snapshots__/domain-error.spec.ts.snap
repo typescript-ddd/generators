@@ -12,7 +12,7 @@ export class UnauthorizedError extends DomainError {
    * @param { string | undefined } message - The message text.
 */
   public constructor(message?: string) {
-    super(message ?? "A unauthorized error has occurred.");
+    super(message ?? " error has occurred.");
   }
 }"
 `;
@@ -28,7 +28,7 @@ export class UnauthorizedError extends DomainError {
    * Initializes a new instance of a unauthorized error.
    */
   public constructor() {
-    super("User is not authorized to perform this action");
+    super("");
   }
 }"
 `;
@@ -45,7 +45,7 @@ export class UnauthorizedError extends DomainError {
    * @param { string | undefined } message - The message text.
 */
   public constructor(message?: string) {
-    super(message ?? "A unauthorized error has occurred.");
+    super(message ?? " error has occurred.");
   }
 }"
 `;

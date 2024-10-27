@@ -6,13 +6,13 @@ const vowels = ["a", "e", "i", "o", "u"];
 
 Handlebars.registerHelper(
   "ifEquals",
-  (arg1: any, arg2: any, options: Handlebars.HelperOptions) => {
+  function (arg1: any, arg2: any, options: Handlebars.HelperOptions) {
     return arg1 === arg2 ? options.fn(this) : options.inverse(this);
   }
 );
 Handlebars.registerHelper(
   "ifDefined",
-  (value: unknown, options: Handlebars.HelperOptions) => {
+  function (value: unknown, options: Handlebars.HelperOptions) {
     return value !== null && value !== undefined
       ? options.fn(this)
       : options.inverse(this);
@@ -20,7 +20,7 @@ Handlebars.registerHelper(
 );
 Handlebars.registerHelper(
   "ifUndefined",
-  (value: unknown, options: Handlebars.HelperOptions) => {
+  function (value: unknown, options: Handlebars.HelperOptions) {
     return value === null || value === undefined
       ? options.fn(this)
       : options.inverse(this);
@@ -28,7 +28,7 @@ Handlebars.registerHelper(
 );
 Handlebars.registerHelper(
   "contains",
-  (needle: string, haystack: string, options: Handlebars.HelperOptions) => {
+  function (needle: string, haystack: string, options: Handlebars.HelperOptions){
     needle = Handlebars.escapeExpression(needle);
     haystack = Handlebars.escapeExpression(haystack);
     return haystack.includes(needle) ? options.fn(this) : options.inverse(this);
