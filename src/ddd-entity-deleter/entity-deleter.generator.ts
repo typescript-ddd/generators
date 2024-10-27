@@ -7,6 +7,5 @@ export const generateEntityDeleter = (data: EntityDeleterTemplateData) => {
 };
 
 export const getEntityDeleterTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-deleter.hbs"
+  getTemplate("entity-deleter.hbs"
   ) as HandlebarsTemplateDelegate<EntityDeleterTemplateData>;

@@ -1,0 +1,23 @@
+import { Command } from "@typescript-ddd/core";
+
+/**
+ * Represents a command for {{actionVerb actionName}} {{noun entityName}}. 
+ */
+export class {{action actionName}}{{pascal entityName}}Command implements Command {
+
+  /**
+   * Initializes a new instance of the {{actionName}} {{natural entityName}} command.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - the identifier of the {{natural entityName}}.
+   {{#each properties}}
+   * @param {{lbrace}}{{type}}{{rbrace}} {{name}} - the {{name}} of the {{natural ../entityName}}.
+   {{/each}}
+   */
+  constructor(
+    public readonly id: {{pascal entityName}}Id,
+    {{#each properties}}
+    public readonly {{name}}: {{type}},
+    {{/each}}
+  ) {
+    // TODO: Add validation here
+  }
+}

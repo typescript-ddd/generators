@@ -6,5 +6,5 @@ export const generateAggregate = (data: AggregateTemplateData) => {
   return template(data);
 };
 
-export const getAggregateTemplate = () => getTemplate(__dirname + "/aggregate.hbs");
-export const getTrackableAggregateTemplate = () => getTemplate(__dirname + "/trackable-aggregate.hbs");
+export const getAggregateTemplate = () => getTemplate("aggregate.hbs");
+export const getTrackableAggregateTemplate = () => getTemplate("trackable-aggregate.hbs");

@@ -7,6 +7,5 @@ export const generateRepository = (data: RepositoryTemplateData) => {
 };
 
 export const getRepositoryTemplate = () =>
-  getTemplate(
-    __dirname + "/repository.hbs"
+  getTemplate("repository.hbs"
   ) as HandlebarsTemplateDelegate<RepositoryTemplateData>;

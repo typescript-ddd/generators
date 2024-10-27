@@ -7,6 +7,5 @@ export const generateEnumType = (data: EnumTypeTemplateData) => {
 };
 
 export const getEnumTypeTemplate = () =>
-  getTemplate(
-    __dirname + "/enum-type.hbs"
+  getTemplate("enum-type.hbs"
   ) as HandlebarsTemplateDelegate<EnumTypeTemplateData>;

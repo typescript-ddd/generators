@@ -1,0 +1,19 @@
+import { DomainError } from "@typescript-ddd/core";
+
+/**
+ * Represents {{noun errorName}} error.
+ */
+export class {{pascal errorName}}Error extends DomainError {
+  /**
+   * Initializes a new instance of {{noun errorName}} error.
+   {{#ifUndefined message}}* @param { string | undefined } message - The message text.{{newline}}*/{{else}}*/{{/ifUndefined}}
+  {{#ifDefined message}}
+  public constructor() {
+    super("{{../message}}");
+  }
+  {{else}}
+  public constructor(message?: string) {
+    super(message ?? "{{firstUpper (noun ../errorName)}} error has occurred.");
+  }
+  {{/ifDefined}}
+}

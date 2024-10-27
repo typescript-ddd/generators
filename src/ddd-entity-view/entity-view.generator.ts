@@ -7,6 +7,5 @@ export const generateEntityView = (data: EntityViewTemplateData) => {
 };
 
 export const getEntityViewTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-view.hbs"
+  getTemplate("entity-view.hbs"
   ) as HandlebarsTemplateDelegate<EntityViewTemplateData>;

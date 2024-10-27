@@ -7,6 +7,5 @@ export const generateEvent = (data: EventTemplateData) => {
 };
 
 export const getEventTemplate = () =>
-  getTemplate(
-    __dirname + "/event.hbs"
+  getTemplate("event.hbs"
   ) as HandlebarsTemplateDelegate<EventTemplateData>;

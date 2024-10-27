@@ -7,6 +7,5 @@ export const generateEntityCreator = (data: EntityCreatorTemplateData) => {
 };
 
 export const getEntityCreatorTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-creator.hbs"
+  getTemplate("entity-creator.hbs"
   ) as HandlebarsTemplateDelegate<EntityCreatorTemplateData>;

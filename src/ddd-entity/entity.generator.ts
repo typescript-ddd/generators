@@ -9,11 +9,9 @@ export const generateEntity = (data: EntityTemplateData) => {
 };
 
 export const getTrackableEntityTemplate = () =>
-  getTemplate(
-    __dirname + "/trackable-entity.hbs"
+  getTemplate("trackable-entity.hbs"
   ) as HandlebarsTemplateDelegate<EntityTemplateData>;
 
 export const getEntityTemplate = () =>
-  getTemplate(
-    __dirname + "/entity.hbs"
+  getTemplate("entity.hbs"
   ) as HandlebarsTemplateDelegate<EntityTemplateData>;

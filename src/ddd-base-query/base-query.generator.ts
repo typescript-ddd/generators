@@ -7,6 +7,5 @@ export const generateBaseQuery = (data: BaseQueryTemplateData) => {
 };
 
 export const getBaseQueryTemplate = () =>
-  getTemplate(
-    __dirname + "/base-query.hbs"
+  getTemplate("base-query.hbs"
   ) as HandlebarsTemplateDelegate<BaseQueryTemplateData>;

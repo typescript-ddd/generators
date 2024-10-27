@@ -6,4 +6,7 @@ export const generateValueObject = (data: ValueObjectTemplateData) => {
   return template(data);
 };
 
-export const getValueObjectTemplate = () => getTemplate(__dirname + "/value-object.hbs") as HandlebarsTemplateDelegate<ValueObjectTemplateData>;
+export const getValueObjectTemplate = () =>
+  getTemplate(
+    "value-object.hbs"
+  ) as HandlebarsTemplateDelegate<ValueObjectTemplateData>;

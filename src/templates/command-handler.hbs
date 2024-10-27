@@ -1,0 +1,27 @@
+import { CommandHandler } from "@typescript-ddd/core";
+import { {{actorName}} } from "../../application";
+import { {{commandName}} } from "./{{commandName}}";
+
+/**
+ * Represents a handler for the {{natural actionName}} {{singular (natural entityName)}} commmand.
+ */
+export class {{commandName}}Handler implements CommandHandler<{{commandName}}> {
+  /**
+   * Initializes a new {{natural actionName}} {{natural entityName}} command handler instance.
+   * @param {{lbrace}}{{pascal entityName}}{{actionActor actionName}}{{rbrace}} {{natural (actionActor actionName)}} - the {{natural entityName}} {{natural (actionActor actionName)}}.
+   */
+  constructor(private readonly {{lower (actionActor actionName)}}: {{actorName}}) {}
+
+  /**
+   * Handles the {{natural actionName}} {{natural entityName}} command.
+   * @param {{lbrace}}{{commandName}}{{rbrace}} command - The command to handle.
+   * @returns {Promise<void>}
+   */
+  public async handle(command: {{commandName}}): Promise<void> {
+    await this.{{lower (actionActor actionName)}}.{{actionName}}({
+      {{#each properties}}
+      {{name}}: command.{{name}},
+      {{/each}}
+    });
+  }
+}

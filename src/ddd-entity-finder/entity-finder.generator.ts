@@ -7,6 +7,5 @@ export const generateEntityFinder = (data: EntityFinderTemplateData) => {
 };
 
 export const getEntityFinderTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-finder.hbs"
+  getTemplate("entity-finder.hbs"
   ) as HandlebarsTemplateDelegate<EntityFinderTemplateData>;

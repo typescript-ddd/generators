@@ -10,6 +10,5 @@ export const generateQuery = (data: QueryTemplateData) => {
 };
 
 export const getQueryTemplate = () =>
-  getTemplate(
-    __dirname + "/query.hbs"
+  getTemplate("query.hbs"
   ) as HandlebarsTemplateDelegate<QueryTemplateData>;

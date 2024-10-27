@@ -7,6 +7,5 @@ export const generateEntityId = (data: EntityIdTemplateData) => {
 };
 
 export const getEntityIdTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-id.hbs"
+  getTemplate("entity-id.hbs"
   ) as HandlebarsTemplateDelegate<EntityIdTemplateData>;

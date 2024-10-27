@@ -10,6 +10,5 @@ export const generateQueryHandler = (data: QueryHandlerTemplateData) => {
 };
 
 export const getQueryHandlerTemplate = () =>
-  getTemplate(
-    __dirname + "/query-handler.hbs"
+  getTemplate("query-handler.hbs"
   ) as HandlebarsTemplateDelegate<QueryHandlerTemplateData>;

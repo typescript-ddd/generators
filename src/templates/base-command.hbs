@@ -1,0 +1,17 @@
+import { Command } from "@typescript-ddd/core";
+
+/**
+ * Represents a base class for {{natural entityName}} commands.
+ {{#each properties}}
+ * @param {{lbrace}}{{type}}{{rbrace}} {{name}} - The {{natural name}} of the {{natural ../entityName}}.
+  {{/each}}
+ */
+export abstract class {{pascal entityName}}Command implements Command {
+  protected constructor(
+    {{#each properties}}
+    public readonly {{name}}: {{type}},
+    {{/each}}
+  ) {
+    // TODO: Add validation here
+  }
+}

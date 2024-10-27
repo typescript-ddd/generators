@@ -7,6 +7,5 @@ export const generateEntityUpdater = (data: EntityUpdaterTemplateData) => {
 };
 
 export const getEntityUpdaterTemplate = () =>
-  getTemplate(
-    __dirname + "/entity-updater.hbs"
+  getTemplate("entity-updater.hbs"
   ) as HandlebarsTemplateDelegate<EntityUpdaterTemplateData>;

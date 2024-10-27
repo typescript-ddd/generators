@@ -11,6 +11,5 @@ export const generateDomainError = (data: DomainErrorTemplateData) => {
 };
 
 export const getDomainErrorTemplate = () =>
-  getTemplate(
-    __dirname + "/domain-error.hbs"
+  getTemplate("domain-error.hbs"
   ) as HandlebarsTemplateDelegate<DomainErrorTemplateData>;

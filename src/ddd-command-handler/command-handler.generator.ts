@@ -28,6 +28,5 @@ export const generateCommandHandler = (data: CommandHandlerInput) => {
 };
 
 export const getCommandHandlerTemplate = () =>
-  getTemplate(
-    __dirname + "/command-handler.hbs"
+  getTemplate("command-handler.hbs"
   ) as HandlebarsTemplateDelegate<CommandHandlerTemplateData>;

@@ -7,6 +7,5 @@ export const generateCommandAction = (data: CommandActionTemplateData) => {
 };
 
 export const getCommandActionTemplate = () =>
-  getTemplate(
-    __dirname + "/command-action.hbs"
+  getTemplate("command-action.hbs"
   ) as HandlebarsTemplateDelegate<CommandActionTemplateData>;

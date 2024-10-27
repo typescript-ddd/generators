@@ -7,6 +7,5 @@ export const generateBaseCommand = (data: BaseCommandTemplateData) => {
 };
 
 export const getBaseCommandTemplate = () =>
-  getTemplate(
-    __dirname + "/base-command.hbs"
+  getTemplate("base-command.hbs"
   ) as HandlebarsTemplateDelegate<BaseCommandTemplateData>;

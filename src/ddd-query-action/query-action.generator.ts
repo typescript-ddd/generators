@@ -7,6 +7,5 @@ export const generateQueryAction = (data: QueryActionTemplateData) => {
 };
 
 export const getQueryActionTemplate = () =>
-  getTemplate(
-    __dirname + "/query-action.hbs"
+  getTemplate("query-action.hbs"
   ) as HandlebarsTemplateDelegate<QueryActionTemplateData>;

@@ -1,0 +1,41 @@
+import { Criteria, DomainEventBus, EntityNotFoundError } from "@typescript-ddd/core";
+import { {{pascal entityName}}Repository } from "../../infrastructure/persistence";
+import { {{pascal entityName}}, {{pascal entityName}}Id } from "../../domain";
+
+/**
+ * Represents a class to find {{plural (lower entityName)}}.
+ */
+export class {{pascal entityName}}Finder {
+  /**
+   * Initializes a new instance of {{noun entityName}} finder.
+   * @param {{lbrace}}{{pascal entityName}}Repository{{rbrace}} repository - The {{natural entityName}} repository.
+   * @param {DomainEventBus} eventBus - The domain event bus.
+   */
+  constructor(
+    private readonly repository: {{pascal entityName}}Repository,
+    private readonly eventBus: DomainEventBus
+  ) {}
+
+  /**
+   * Finds {{noun entityName}} by a {{lower entityName}} id.
+   * @param {{lbrace}}{{pascal entityName}}Id{{rbrace}} id - The {{natural entityName}} identity value.
+   * @returns {{lbrace}}Promise<{{pascal entityName}}View>{{rbrace}} - A {{lower entityName}} view.
+   */
+  public async findById(id: {{pascal entityName}}Id): Promise<{{pascal entityName}}View> {
+    const entity = await this.repository.findById(id);
+    if (!entity) {
+      throw new EntityNotFoundError("{{pascal entityName}}", id);
+    }
+    return {{pascal entityName}}View.create(...entity);
+  }
+
+  /**
+   * Finds {{plural (lower entityName)}} by criteria.
+   * @param {{lbrace}}Criteria{{rbrace}} criteria - The critieria value.
+   * @returns {{lbrace}}Promise<{{pascal entityName}}View[]>{{rbrace}} - A collection of {{lower entityName}} views.
+   */
+  public async findAll(criteria: Criteria): Promise<{{pascal entityName}}View[]> {
+    const entities = await this.repository.findAll(criteria);
+    return entities.map((entity) => {{pascal entityName}}View.create(...entity));
+  }
+}
